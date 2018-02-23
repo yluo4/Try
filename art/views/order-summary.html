@@ -1,0 +1,90 @@
+<style>
+    table.order-summary-table {
+        width: 100%;
+    }
+
+    table.order-summary-table thead tr {
+        background: #ebebeb;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.24);
+        font-weight: bold;
+    }
+
+    table.order-summary-table thead div {
+        font-size: 0.9em;
+    }
+
+    table.order-summary-table td {
+        width: 50%;
+        padding: 5px;
+        font-size: 0.9em;
+    }
+
+    table.order-summary-table td:first-child div {
+        border-right: 1px solid #8c8c8c;
+    }
+
+    table.order-summary-table tbody tr:not(:first-child) {
+        border-top: 1px solid #ababab;
+    }
+
+    .order-summary-row {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .order-summary-label {
+        margin-bottom: 5px;
+        font-weight: bold !important;
+    }
+
+    .order-summary-scenario {
+        color: #3b86bc;
+        font-size: 0.87em;
+        font-weight: bold;
+        border: 1px solid #3b86bc;
+        border-radius: 3px;
+        padding: 7px 5px;
+    }
+
+    .order-summary-table-area {
+        height: 70px;
+        overflow-y: auto;
+    }
+</style>
+<div class="order-summary" style="padding-top: 20px;">
+    <div class="row order-summary-row">
+        <div class="col-xs-12">
+            <label class="order-summary-label">Rehome:</label>
+            <div class="order-summary-table-area">
+                <table class="order-summary-table">
+                    <thead>
+                        <tr>
+                            <td><div>From: {{orderSummary.from}}</div></td>
+                            <td><div>To: {{orderSummary.to}}</div></td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="order in orderSummary.orders">
+                            <td><div>{{order.source.posStr}}</div></td>
+                            <td><div>{{order.target ? order.target.posStr : ""}}</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row order-summary-row" style="margin-top: 10px;">
+        <div class="col-xs-12">
+            <label class="order-summary-label">Scenario:</label>
+            <div class="order-summary-scenario">
+                {{orderSummary.scenario}}
+            </div>
+            <!--
+            <div class="order-summary-scenario">
+                ALBYCA110CW010128061LSW02 GF, R 1G to SACRCA110CW010128061LSW03 GF, R 1G
+            </div>
+            -->
+        </div>
+    </div>
+</div>

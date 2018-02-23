@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style>
+    .common {
+      margin-top: 20px;
+    }
+    .inventory-select {
+      padding-right: 10px;
+    }
+    .useraccess-alert-message-area {
+      width: 708px;
+      height: 50px;
+      position: absolute;
+      top: 38px;
+      left: 15px;
+      z-index: 3;
+    }
+  </style>
+</head>
+
+<body>
+  <form novalidate name="artInventorySelectform">
+    <div style="padding-left:15px; padding-right:15px;">
+      <div class="row useraccess-alert-message-area" ng-show="!mylogin_profile">
+        <div class="col-sm-12 col-md-12">
+            <div class="alert alert-danger">
+                <span style="font-size:20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><strong >&nbsp;&nbsp;Authentication Failed</strong></span>
+                  <hr>
+                <p style="height:80px;"><strong style="font-size:15px;">{{accessErrMsg[0]}}<a id="email" href="#">&nbsp;{{accessErrMsg[1]}}&nbsp;</a>{{accessErrMsg[2]}}</strong></p>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="padding-top:15px">
+          <label style="text-align:left; color:#0568AE;font-size:14px;padding-bottom:3px;"><strong>US Locations</strong></label>
+        </div>
+      </div>
+      <div class="row inventory-select">
+        <div class="col-md-3">
+          <label class="common"><strong>Region:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE;"></span></label>
+          <select id="regionSelect" class="form-control common" ng-model="region_id" ng-change="execActions({action: 'regionSelected'})" ng-options="region.id as region.value for region in regions | orderBy:'value'">
+							<option value="">ALL REGIONS</option>
+						</select>
+        </div>
+        <div class="col-md-3">
+          <label class="common"><strong>State:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE;"></span></label>
+          <select class="form-control common" ng-model="state_id" ng-change="execActions({action: 'stateSelected'})" ng-options="state.id as state.value for state in states | orderBy:'value'">
+							<option value=""></option>
+						</select>
+        </div>
+        <div class="col-md-3">
+          <label class="common"><strong>DMA:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE;"></span></label>
+          <select class="form-control common" ng-model="dma_id" ng-change="execActions({action: 'stateDmaSelected'})" ng-options="dma.id as dma.value for dma in dmas | orderBy:'value'">
+								<option value=""></option>
+						</select>
+        </div>
+        <div class="col-md-3">
+          <label class="common"><strong>Wire Center:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE;"></span></label>
+          <select class="form-control common" ng-model="wirecenter_id" ng-change="execActions({action: 'wirecenterSelected'})" ng-options="wirecenter.id as wirecenter.value for wirecenter in wirecenters | orderBy:'value'">
+								 <option value=""></option>
+						</select>
+        </div>
+      </div>
+      <div class="row inventory-select" style="margin-top:7%">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <button class="btn btn-primary btn-xs" ng-click="execActions({action: 'select'})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary btn-xs" style="margin-left:15px;" ng-click="execActions({action: 'reset'})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>

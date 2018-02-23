@@ -1,0 +1,44 @@
+<style>
+    .dashboard-reporting-grid .ui-grid-header-cell .ui-grid-cell-contents {
+      height: 40px;
+    }
+    .dashboard-reporting-grid .ui-grid-header-cell .ui-grid-header-cell-label{
+      white-space: normal;
+      padding-left: 12px;
+      position: absolute;
+    }
+    .dashboard-reporting-grid .ui-grid-icon-plus-squared {
+      color: #337ab7;
+      vertical-align: middle;
+    }
+    .dashboard-reporting-grid .ui-grid-icon-minus-squared {
+      color: #337ab7;
+      vertical-align: middle;
+    }
+    .dr-maingrid-data-row {
+      text-align: center;
+      padding-top: 5px;
+    }
+    .dr-monthyear-cell {
+      padding-top: 5px;
+      padding-left: 5px;
+    }
+    .dr-subgrid-data-row {
+      padding-left: 12px;
+    }
+</style>
+
+<div ng-if="hasDashboardReportData">
+  <div style="height:25px; margin-top:5px">
+    <label style="text-align:center;width:125px;margin-left:20px;"><strong>MONTH &amp; YEAR</strong></label>
+    <label style="text-align:center;width:150px"><strong>TOTAL ORDERS</strong></label>
+    <label style="text-align:center;width:150px"><strong>EQUIPMENT TYPE</strong></label>
+    <label style="text-align:center;width:200px"><strong>ORDER STATUS</strong></label>
+  </div>
+  <div class="dashboard-reporting-grid" >
+    <div ui-grid="gridOptions" class="grid" ui-grid-auto-resize ui-grid-pinning ui-grid-expandable ng-style="drGridHeight"></div>
+  </div>
+</div>
+<div ng-if="!hasDashboardReportData">
+    <label class='w-statusInfo'>No Data Found</label>
+</div>

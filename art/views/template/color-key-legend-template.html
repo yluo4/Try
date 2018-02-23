@@ -1,0 +1,105 @@
+<style>
+    .color-key {
+        background: #ffffff;
+        padding: 10px;
+        width: 805px;
+        position: absolute;
+        left: 527px;
+        top: 84px;
+        z-index: 3;
+        border-radius: 10px;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.24), 0 0 2px rgba(0,0,0,0.12);
+        cursor: move;
+    }
+
+    .color-key div {
+        float: left;
+    }
+
+    .color-key td.legend-icon {
+        width: 32px;
+        height: 25px;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 0.9em;
+    }
+
+    .color-key td.legend-icon-gap {
+        width: 25px;
+        height: 25px;
+    }
+
+    .color-key td span.legend-name {
+        font-size: 0.8em;
+        width: 40px;
+        position: absolute;
+        top: 38px;
+    }
+</style>
+<div class="color-key" ng-show="inNode.isShowLegend">
+    <div style="margin-right: 20px;">
+        <span style="font-weight: bold;">Color Key</span>
+    </div>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="type-working legend-icon">1</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-pending legend-icon">2</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-pending-order legend-icon">3</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-design legend-icon">4</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-reserved legend-icon">5</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-defective legend-icon">6</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-spare legend-icon">7</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-lag-member legend-icon">8</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-from-in-progress legend-icon">9</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-to-in-progress legend-icon">10</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-working legend-icon">G6</td>
+                    <td class="legend-icon-gap"></td>
+                    <td class="type-working legend-icon">IO</td>
+                    <td class="legend-icon-gap"></td>
+                </tr>
+                <tr>
+                    <td><span class="legend-name">Working</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Pending</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Pending Order</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Design</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Reserved</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Defective</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">Spare</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">LAG member</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">From In Progress</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">To In Progress</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">G6</span></td>
+                    <td class="legend-icon-gap"></td>
+                    <td><span class="legend-name">IO</span></td>
+                    <td class="legend-icon-gap"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="cursor: pointer;">
+        <img src="/appboard/icecap-appboard-lob-plugins/art/images/cancel-icon.png"
+            width="12" height="12" ng-click="inNode.legendCancelIconClick()" />
+    </div>
+</div>

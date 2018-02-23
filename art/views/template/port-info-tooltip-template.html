@@ -1,0 +1,75 @@
+<style>
+    .info-tooltip {
+        position: absolute;
+        top: 200px;
+        left: 0px;
+        z-index: 3;
+        font-size: 0.8em;
+        font-weight: bold;
+        color: #8d8d8a;
+        background: #ffffe1;
+        padding: 8px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.24), 0 0 2px rgba(0,0,0,0.12);
+    }
+
+    table.table-info-tooltip td {
+        white-space: nowrap;
+    }
+    .iom-mda-info-tooltip {
+        white-space: nowrap;
+    }
+
+    .animate-show-hide {
+        transition: opacity linear 0.5s;
+    }
+    .animate-show-hide.ng-hide {
+        transition: initial;
+        opacity: 0;
+    }
+</style>
+<div class="info-tooltip animate-show-hide" ng-style="infoTooltip.position" ng-show="infoTooltip.isShow">
+    <div ng-if="!infoTooltip.isPortTooltip" class="iom-mda-info-tooltip">{{infoTooltip.iomMda}}</div>
+    <table ng-if="infoTooltip.isPortTooltip" class="table-info-tooltip">
+        <tr ng-if="infoTooltip.isShowReason" style="color:#ff0000;">
+            <td>Disabled Reason:&nbsp;</td>
+            <td>{{infoTooltip.reason}}</td>
+        </tr>
+        <tr>
+            <td>Port Type:&nbsp;</td>
+            <td>{{infoTooltip.port_type}}</td>
+        </tr>
+        <tr>
+            <td>Port Desc:&nbsp;</td>
+            <td>{{infoTooltip.port_desc}}</td>
+        </tr>
+        <tr>
+            <td>Port Status:&nbsp;</td>
+            <td>{{infoTooltip.port_status}}</td>
+        </tr>
+        <tr>
+            <td>Circuit Type:&nbsp;</td>
+            <td>{{infoTooltip.circuit_type}}</td>
+        </tr>
+        <tr>
+            <td>Z-End Device:&nbsp;</td>
+            <td>{{infoTooltip.z_device}}</td>
+        </tr>
+        <tr>
+            <td>Subscriber Count:&nbsp;</td>
+            <td>{{infoTooltip.sub_count}}</td>
+        </tr>
+        <tr ng-if="infoTooltip.isShowLAG_order">
+            <td>LAG Order:&nbsp;</td>
+            <td>{{infoTooltip.lag_order}}</td>
+        </tr>
+        <tr ng-if="infoTooltip.pending_order" style="color:#ff0000;">
+            <td>Pending Order:&nbsp;</td>
+            <td>{{infoTooltip.pending_order}}</td>
+        </tr>
+        <tr ng-if="infoTooltip.pending_order_circuit" style="color:#ff0000;">
+            <td>New Circuit Name:&nbsp;</td>
+            <td>{{infoTooltip.pending_order_circuit}}</td>
+        </tr>
+    </table>
+</div>

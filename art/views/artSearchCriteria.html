@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style>
+    .search-label {
+      margin-top: 10px;
+    }
+    .useraccess-alert-message-area {
+      width: 872px;
+      height: 50px;
+      position: absolute;
+      top: 38px;
+      left: 10px;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+  <form name="artSearchCriteriaForm">
+    <div style="padding-left:10px; padding-right:10px">
+      <div class="row" style="padding-top:20px">
+        <div class="row useraccess-alert-message-area" ng-show="!search_mylogin_profile">
+          <div class="col-sm-12 col-md-12">
+              <div class="alert alert-danger">
+                  <span style="font-size:20px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><strong >&nbsp;&nbsp;Authentication Failed</strong></span>
+                    <hr>
+                  <p style="height:50px"><strong style="font-size:16px;">{{searchAccessErrMsg[0]}}<a id="emailSearch" href="#">&nbsp;{{searchAccessErrMsg[1]}}&nbsp;</a>{{searchAccessErrMsg[2]}}</strong></p>
+              </div>
+          </div>
+        </div>
+            <div class="col-xs-2" style="width:145px">
+              <label><strong>&nbsp;&nbsp;LSC Order:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE"></span></label>
+              <input name="lscOrder" class="form-control search-label" type="text" style="height:34px" maxLength="30" title="Max 30 characters allowed." ng-model="lsc_order"
+              ng-pattern="/^[a-zA-Z0-9]+$/" ng-disabled="overdue === 'Yes'">
+              <div ng-show="artSearchCriteriaForm.lscOrder.$error.pattern" style="color:red">*Invalid LSC Order. Please enter only alpha-numeric characters!</div>
+            </div>
+            <div class="col-xs-3" style="width:175px">
+              <label><strong>&nbsp;&nbsp;From Date:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE"></span></label>
+              <adm-dtp name="fromDate" class="search-label" ng-model="from_date" options="{format: 'MM-DD-YYYY'}" full-data="from_date_detail" maxDate="{{to_date_detail.unix}}" disable="{{overdue === 'Yes'}}"></adm-dtp>
+            </div>
+            <div class="col-xs-3" style="width:175px">
+              <label><strong>&nbsp;&nbsp;To Date:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o" style="color:#0568AE"></span></label>
+              <adm-dtp name="toDate" class="search-label" ng-model="to_date" options="{format: 'MM-DD-YYYY'}" full-data="to_date_detail" minDate="{{from_date_detail.unix}}" disable="{{overdue === 'Yes'}}"></adm-dtp>
+            </div>
+            <div class="col-xs-3" style="width:235px">
+              <label><strong>&nbsp;&nbsp;CO 7450:&nbsp;&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o " style="color:#0568AE "></span></label>
+              <input name="co7450 " class="form-control search-label " type="text " style="height:34px" ng-model="co_7450 " maxLength="30 " title="Max 30 characters allowed. "
+              ng-pattern="/^[a-zA-Z0-9]+$/ " ng-disabled="overdue === 'Yes' ">
+              <div ng-show="artSearchCriteriaForm.co7450.$error.pattern " style="color:red ">*Invalid CO7450. Please enter only alpha-numeric characters!</div>
+           </div>
+           <div class="col-xs-1" style="width:140px">
+              <label><strong>&nbsp;&nbsp;Wire Center:&nbsp;&nbsp;</strong><span class="fa fa-question-circle-o " style="color:#0568AE "></span></label>
+              <input name="wireCenter " class="form-control search-label " type="text " style="height:34px " ng-model="wire_center " maxlength="8 " title="Max 8 characters allowed. "
+              ng-pattern="/^[a-zA-Z0-9]+$/ " ng-disabled="overdue === 'Yes' ">
+              <div ng-show="artSearchCriteriaForm.wireCenter.$error.pattern " style="color:red ">*Invalid Wire Center. Please enter only alpha-numeric characters!</div>
+           </div>
+      </div>
+      <div class="row " style="margin-top:20px;width:870px ">
+        <div class="col-xs-12 ">
+          <label><i><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or</strong></i></label></br>
+        </div>
+      </div>
+     <div class="row " style="margin-top:20px;width:870px ">
+       <div class="col-xs-6 ">
+        <md-checkbox name="overdueOrders" class="md-warn " style="margin-left:10px " ng-true-value=" 'Yes' "
+             ng-false-value=" 'No' " ng-model="overdue" ng-click="execActions({action: 'clearText'}) " aria-label="overdue "></md-checkbox>
+         <label><strong>Overdue Orders</strong></label>
+       </div>
+        <div class="col-xs-6 ">
+          <div class="pull-right ">
+            <button class="btn btn-primary btn-xs"  ng-click="execActions({action: 'search'}) ">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary btn-xs" style="margin-left:15px " ng-click="execActions({action: 'reset'}) ">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </form>
+</body>
+
+</html>

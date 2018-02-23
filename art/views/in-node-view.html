@@ -1,0 +1,214 @@
+<style>
+    div.table-device-div {
+        margin-top: 15px;
+        height: 550px;
+    }
+
+    table.table-device {
+        border-collapse: separate;
+    }
+
+    table.table-device th {
+        white-space: nowrap;
+    }
+
+    table.table-device td {
+        border-left: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        outline: none;
+        width: 32px;
+        height: 25px;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 0.8em;
+        cursor: default;
+    }
+
+    table.table-device td:nth-child(odd) {
+        border-left-width: 3px;
+    }
+
+    table.table-device td:last-child {
+        border-right: 3px solid #dddddd;
+    }
+
+    table.table-device tr:last-child td {
+        border-bottom: 1px solid #dddddd;
+    }
+
+    table.table-device td.pickable-cell:hover {
+        box-shadow: 0px 0px 10px #F44336;
+        position: relative;
+        cursor: pointer;
+    }
+    table.table-device td.unPickable-cell:hover {
+        cursor: not-allowed;
+    }
+
+    table.table-device .subSlot-indicator {
+        font-size: 0.7em;
+        font-weight: bold;
+        height: 15px;
+        color: #0b68ac;
+    }
+
+    .type-working {
+        background: #dcffb9;
+        color: #0b68ac;
+    }
+
+    .type-pending {
+        background: #ff9d43;
+        color: #ffffff;
+    }
+
+    .type-pending-order {
+        background: #f94949;
+        color: #ffffff;
+    }
+
+    .type-in-progress {
+        background: #ffff99;
+        color: #0b68ac;
+        border: 3px solid #7f7f7f;
+    }
+
+    .type-design {
+        background: #28b3f8;
+        color: #ffffff;
+    }
+
+    .type-reserved {
+        background: #d3e9fa;
+        color: #0b68ac;
+    }
+
+    .type-defective {
+        background: #ff71c6;
+        color: #ffffff;
+    }
+
+    .type-spare {
+        background: #f2f2f2;
+        color: #0b68ac;
+    }
+
+    .type-lag-member {
+        background: #ffffff;
+        color: #0b68ac;
+        border: 3px solid #92d050 !important;
+    }
+
+    .type-from-in-progress {
+        background: #dcffb9;
+        color: #0b68ac;
+        border: 3px solid #cc3399 !important;
+    }
+
+    .type-to-in-progress {
+        background: #f2f2f2;
+        color: #0b68ac;
+        border: 3px solid #ff0000 !important;
+    }
+
+    .from-in-progress-pulse {
+        position: relative;
+        animation: pulse-from-border 1s infinite;
+    }
+    .to-in-progress-pulse {
+        position: relative;
+        animation: pulse-to-border 1s infinite;
+    }
+
+    @keyframes pulse-from-border {
+        from, to { box-shadow: 0 0 0 0 #cc3399;}
+        50% { box-shadow: 0 0 0 4px #cc3399; }
+    }
+    @keyframes pulse-to-border {
+        from, to { box-shadow: 0 0 0 0 #ff0000;}
+        50% { box-shadow: 0 0 0 4px #ff0000; }
+    }
+
+</style>
+<div class="in-node-view" ng-if="inNode.isShowInNodeView">
+    <div class="row" style="padding: 10px;">
+        <div class="col-xs-8">
+            <button class="btn btn-default btn-xs" ng-click="inNode.legendBtnClick($event)">
+                key
+                <img src="/appboard/icecap-appboard-lob-plugins/art/images/plus-icon.png"
+                    width="12" height="12" />
+            </button>
+        </div>
+        <div class="col-xs-4">
+            <div style="float: right;">
+                <label>Rehome:</label>
+                <input type="checkbox" ng-model="inNode.rehomeChecked" ng-change="inNode.rehomeCheckChanged()"></input>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 20px;">
+        <div class="col-xs-12">
+            <span>From: </span>
+            <!--
+            <span style="color:#0b68ac; font-weight:bold;">DCTRILCCP01WOWO1O1 602529LS</span>
+            -->
+            <span style="color:#0b68ac; font-weight:bold;">{{inNode.inNodeView.deviceName}}</span>
+        </div>
+    </div>
+    <div class="row" style="padding-left:15px;padding-right:15px;">
+        <div class="col-xs-12 table-device-div">
+        <table class="table-device">
+            <thead>
+                <tr>
+                    <th colspan="2" ng-repeat="slotTitle in inNode.inNodeView.slotsTitle"
+                        ng-mouseover="inNode.iomMdaMouseOver(slotTitle.name)"
+                        ng-mouseleave="inNode.iomMdaMouseOut()">
+                        S{{slotTitle.slot_num}}<br/><span style="font-size: 0.95em;">{{slotTitle.displayName}}</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="subSlot-indicator" ng-repeat-start="slotTitle in inNode.inNodeView.slotsTitle"
+                        ng-mouseover="inNode.iomMdaMouseOver(slotTitle.mda1_desc)"
+                        ng-mouseleave="inNode.iomMdaMouseOut()">
+                        MDA1
+                    </td>
+                    <td class="subSlot-indicator" ng-repeat-end
+                        ng-mouseover="inNode.iomMdaMouseOver(slotTitle.mda2_desc)"
+                        ng-mouseleave="inNode.iomMdaMouseOut()">
+                        MDA2
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in inNode.inNodeView.device">
+                    <td ng-repeat="col in row track by $index"
+                        class="{{col===null ? '' : col.port_cell_class}}"
+                        ng-click="inNode.portClick($parent.$index, $index)"
+                        ng-mouseover="inNode.portMouseOver($parent.$index, $index)"
+                        ng-mouseleave="inNode.portMouseOut($parent.$index, $index)">
+                        <!--
+                        <span class="subSlot-indicator" ng-if="$parent.$index == 0">
+                            {{$index % 2 === 0 ? "MDA1" : "MDA2"}}
+                            <br/>
+                        </span>
+                    -->
+                        {{inNode.getPortName(col)}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="row" style="padding-right:30px;padding-top:10px;">
+        <div class="col-xs-12">
+            <button class="btn btn-primary btn-xs" style="float:right;" ng-click="inNode.resetBtnClick()">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Reset
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+</div>
+
+<color-key-div></color-key-div>
+<port-info-tooltip></port-info-tooltip>

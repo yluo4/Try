@@ -1,0 +1,102 @@
+
+<style>
+    .order-submission-row {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .order-submission-label {
+        margin-bottom: 5px;
+        font-weight: bold !important;
+    }
+
+    .current-day-cell button {
+        background-color: #e0dcdb !important;
+    }
+
+    .available-day-cell button {
+        background-color: #d6f9d1 !important;
+    }
+
+    .partially-available-day-cell button {
+        background-color: #fcdda4 !important;
+    }
+
+    .not-available-day-cell button {
+        background-color: #ff6666 !important;
+    }
+
+    .uib-day button.btn-info {
+        background-color: #afdfed !important;
+        border-color: #afdfed !important;
+    }
+
+    input.calendar-date-input.ng-invalid {
+        border: 1px solid red !important;
+    }
+
+    .submission-alert-message-area {
+        width: 278px;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: absolute;
+        z-index: 3;
+    }
+</style>
+<div class="order-submission" style="padding-top: 20px;" adjust-widget-css>
+    <div class="row order-submission-row submission-alert-message-area" ng-show="orderSubmission.isShowAlertArea">
+        <div class="col-xs-12">
+            <div class="alert {{orderSubmission.isSucc ? 'alert-success' : 'alert-danger'}}" role="alert">
+                <button type="button" class="close" aria-label="Close" ng-click="orderSubmission.closeAlertArea()"><span aria-hidden="true">&times;</span></button>
+                <strong>{{orderSubmission.message}}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row order-submission-row">
+        <div class="col-xs-10">
+            <div class="form-group">
+                <label class="order-submission-label">Estimated Date:</label>
+                <p class="input-group">
+                    <input type="text" class="form-control calendar-date-input" uib-datepicker-popup
+                        ng-model="orderSubmission.dt" is-open="orderSubmission.opened"
+                        datepicker-template-url="icecap-appboard-lob-plugins/art/views/template/datepicker.html"
+                        datepicker-popup-template-url="icecap-appboard-lob-plugins/art/views/template/popup.html"
+                        datepicker-options="orderSubmission.dateOptions" on-open-focus="false"
+                        ng-disabled="orderSubmission.calendarDisabled"
+                        ng-change="orderSubmission.dateChange()"
+                        placeholder="YYYY-MM-DD"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                            ng-click="orderSubmission.open()" style="height: 28px;"
+                            ng-disabled="orderSubmission.calendarDisabled">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row order-submission-row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label class="order-submission-label">Add Notes:</label>
+                <textarea class="form-control" rows="3" ng-style="orderSubmission.orderNotesStyle"
+                    ng-model="orderSubmission.orderNotes" ng-change="orderSubmission.validateNotes()">
+                </textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row order-submission-row" style="margin-top: 5px;">
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <button class="btn btn-primary btn-xs" ng-click="orderSubmission.submitClick()"
+                    submitting-button is-submitting="orderSubmission.isSubmitting">
+                    &nbsp;
+                    Submit Order
+                    &nbsp;
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

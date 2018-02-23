@@ -1,0 +1,62 @@
+
+<style>
+    .order-summary-reporting-grid .ui-grid-header-cell .ui-grid-cell-contents {
+        height: 32.8px;
+    }
+    .order-summary-reporting-grid .ui-grid-header-cell .ui-grid-header-cell-label {
+        white-space: normal;
+        position: absolute;
+        bottom: 0px;
+    }
+    .order-summary-reporting-grid .ui-grid-icon-plus-squared {
+        color: #337ab7;
+    }
+    .order-summary-reporting-grid .ui-grid-icon-minus-squared {
+        color: #337ab7;
+    }
+    .order-summary-reporting-grid .order-summary-parent-tile {
+        font-weight: bold;
+        margin: 10px 0px 5px 5px;
+    }
+    .order-summary-reporting-grid .order-summary-child-tile {
+        font-weight: bold;
+        margin: 5px 0px 5px 5px;
+    }
+    /*
+    .order-summary-reporting-grid .ui-grid-top-panel {
+        background: #ffffff;
+    }
+    */
+    .order-summary-reporting-grid .ui-grid-header-cell{
+        font-weight: bold !important;
+        color: #808080;
+        padding-left: 5px;
+    }
+    .order-summary-reporting-grid .subGrid-div .ui-grid-top-panel {
+        background: #f3f3f3;
+    }
+    .order-summary-reporting-grid .ui-grid-cell {
+        padding-left: 5px;
+    }
+    .order-summary-reporting-grid .ui-grid-row:nth-child(odd) .ui-grid-cell {
+        background-color: #f3f3f3;
+    }
+    .order-summary-reporting-grid .subGrid-div .ui-grid-row:nth-child(odd) .ui-grid-cell {
+        background-color: #ffffff;
+    }
+    .order-summary-reporting-grid .subGrid-div .ui-grid-row:nth-child(even) .ui-grid-cell {
+        background-color: #f3f3f3;
+    }
+
+    .order-reporting-tooltip .tooltip-inner {
+        max-width: 300px;
+    }
+
+</style>
+<div class="order-summary-reporting-grid" ng-if="hasOrderSummary">
+    <div class="order-summary-parent-tile">Parent LSC Order Info</div>
+    <div ui-grid="gridOptions" ui-grid-expandable ui-grid-auto-resize ui-grid-pinning class="grid" ng-style="gridStyle"></div>
+</div>
+<div ng-if="!hasOrderSummary">
+    <label class='w-statusInfo'>No Data Found</label>
+</div>

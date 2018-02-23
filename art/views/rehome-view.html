@@ -1,0 +1,372 @@
+
+<div class="rehome-view" ng-if="rehome.isShowRehomeView">
+    <div class="row" style="padding-left: 20px; margin-top: 42px;">
+        <div class="col-xs-12">
+            <span>To: </span>
+            <!--
+            <span style="color:#0b68ac; font-weight:bold;">ATLGACCP01WOWO1O1 602529LS</span>
+            -->
+            <span style="color:#0b68ac; font-weight:bold;">{{rehome.rehomeView.deviceName}}</span>
+        </div>
+    </div>
+    <div class="row" style="padding-left:15px;padding-right:15px;">
+        <div class="col-xs-12 table-device-div">
+        <table class="table-device">
+            <thead>
+                <tr>
+                    <th colspan="2" ng-repeat="slotTitle in rehome.rehomeView.slotsTitle"
+                        ng-mouseover="rehome.iomMdaMouseOver(slotTitle.name)"
+                        ng-mouseleave="rehome.iomMdaMouseOut()">
+                        S{{slotTitle.slot_num}}<br/><span style="font-size: 0.95em;">{{slotTitle.displayName}}</span>
+                    </th>
+                    <tr>
+                        <td class="subSlot-indicator" ng-repeat-start="slotTitle in rehome.rehomeView.slotsTitle"
+                            ng-mouseover="rehome.iomMdaMouseOver(slotTitle.mda1_desc)"
+                            ng-mouseleave="rehome.iomMdaMouseOut()">
+                            MDA1
+                        </td>
+                        <td class="subSlot-indicator" ng-repeat-end
+                            ng-mouseover="rehome.iomMdaMouseOver(slotTitle.mda2_desc)"
+                            ng-mouseleave="rehome.iomMdaMouseOut()">
+                            MDA2
+                        </td>
+                    </tr>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in rehome.rehomeView.device">
+                    <td ng-repeat="col in row track by $index"
+                        class="{{col===null ? '' : col.port_cell_class}}"
+                        ng-click="rehome.portClick($parent.$index, $index)"
+                        ng-mouseover="rehome.portMouseOver($parent.$index, $index)"
+                        ng-mouseleave="rehome.portMouseOut($parent.$index, $index)">
+                        <!--
+                        <span class="subSlot-indicator" ng-if="$parent.$index == 0">
+                            {{$index % 2 === 0 ? "MDA1" : "MDA2"}}
+                            <br/>
+                        </span>
+                    -->
+                        {{rehome.getPortName(col)}}
+                    </td>
+                </tr>
+
+                <!--
+                <tr>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                </tr>
+                <tr>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                </tr>
+                <tr>
+                    <td class="type-working">3</td>
+                    <td class="type-working">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                </tr>
+                <tr>
+                    <td class="type-working">4</td>
+                    <td class="type-working">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                </tr>
+                <tr>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                </tr>
+
+
+                <tr>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                </tr>
+                <tr>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                </tr>
+                <tr>
+                    <td class="type-working">3</td>
+                    <td class="type-working">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                </tr>
+                <tr>
+                    <td class="type-working">4</td>
+                    <td class="type-working">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                </tr>
+                <tr>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                </tr>
+                <tr>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                </tr>
+                <tr>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                </tr>
+                <tr>
+                    <td class="type-working">3</td>
+                    <td class="type-working">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                </tr>
+                <tr>
+                    <td class="type-working">4</td>
+                    <td class="type-working">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                </tr>
+                <tr>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                </tr>
+                <tr>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-working">1</td>
+                    <td class="type-spare">1</td>
+                    <td class="type-spare">1</td>
+                </tr>
+                <tr>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-working">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-design">2</td>
+                    <td class="type-pending-order">2</td>
+                    <td class="type-pending-order">2</td>
+                </tr>
+                <tr>
+                    <td class="type-working">3</td>
+                    <td class="type-working">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-spare">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-pending">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                    <td class="type-reserved">3</td>
+                </tr>
+                <tr>
+                    <td class="type-working">4</td>
+                    <td class="type-working">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-design">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-spare">4</td>
+                    <td class="type-defective">4</td>
+                    <td class="type-defective">4</td>
+                </tr>
+                <tr>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-spare">5</td>
+                    <td class="type-working">5</td>
+                    <td class="type-working">5</td>
+                </tr>
+                -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <!--
+    <div class="row" style="padding-right:30px;padding-top:10px;">
+        <div class="col-xs-12">
+            <button class="btn btn-primary btn-xs" style="float:right;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Cancel
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+    -->
+</div>
+
+
+<!--
+<div>
+    <table>
+        <tbody>
+            <tr>
+                <td class="type-working">1</td>
+                <td class="type-working">1</td>
+                <td class="type-spare">1</td>
+                <td class="type-spare">1</td>
+                <td class="type-working">1</td>
+                <td class="type-working">1</td>
+                <td class="type-working">1</td>
+                <td class="type-working">1</td>
+            </tr>
+            <tr>
+                <td class="type-design">2</td>
+                <td class="type-design">2</td>
+                <td class="type-pending-order">2</td>
+                <td class="type-pending-order">2</td>
+                <td class="type-working">2</td>
+                <td class="type-working">2</td>
+                <td class="type-design">2</td>
+                <td class="type-design">2</td>
+            </tr>
+            <tr>
+                <td class="type-working">3</td>
+                <td class="type-working">3</td>
+                <td class="type-spare">3</td>
+                <td class="type-spare">3</td>
+                <td class="type-pending">3</td>
+                <td class="type-pending">3</td>
+                <td class="type-reserved">3</td>
+                <td class="type-reserved">3</td>
+            </tr>
+            <tr>
+                <td class="type-working">4</td>
+                <td class="type-working">4</td>
+                <td class="type-design">4</td>
+                <td class="type-design">4</td>
+                <td class="type-defective">4</td>
+                <td class="type-defective">4</td>
+                <td class="type-spare">4</td>
+                <td class="type-spare">4</td>
+            </tr>
+            <tr>
+                <td class="type-spare">5</td>
+                <td class="type-spare">5</td>
+                <td class="type-spare">5</td>
+                <td class="type-spare">5</td>
+                <td class="type-working">5</td>
+                <td class="type-working">5</td>
+                <td class="type-spare">5</td>
+                <td class="type-spare">5</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->

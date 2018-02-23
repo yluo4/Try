@@ -1,0 +1,73 @@
+<style>
+    .calendar-legend-row {
+        margin: 33px 0px 0px 0px;
+    }
+
+    .calendar-legend-col {
+        border-top: 1.5px solid #dedede;
+        padding: 8px 5px 0px 5px;
+    }
+
+    .calendar-legend-icon {
+        width: 26px;
+        height: 17px;
+        text-align: center;
+        font-size: 0.7em;
+        background: cyan;
+    }
+
+    .calendar-legend-name {
+        font-weight: bold;
+        font-size: 0.5em;
+        padding: 2px;
+    }
+
+    .calendar-max-order-display-row {
+        margin: 0px 0px 0px 0px;
+    }
+
+    .calendar-max-order-display {
+        text-align: center;
+    }
+
+    .calendar-max-order-display span {
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+</style>
+<ul role="presentation" class="uib-datepicker-popup dropdown-menu uib-position-measure" dropdown-nested ng-if="isOpen" ng-keydown="keydown($event)" ng-click="$event.stopPropagation()">
+  <li ng-transclude></li>
+  <li ng-if="showButtonBar" class="uib-button-bar">
+    <span class="btn-group pull-left">
+      <button type="button" class="btn btn-sm btn-info uib-datepicker-current" ng-click="select('today', $event)" ng-disabled="isDisabled('today')">{{ getText('current') }}</button>
+      <button type="button" class="btn btn-sm btn-danger uib-clear" ng-click="select(null, $event)">{{ getText('clear') }}</button>
+    </span>
+    <button type="button" class="btn btn-sm btn-success pull-right uib-close" ng-click="close($event)">{{ getText('close') }}</button>
+  </li>
+  <li>
+    <div class="row calendar-legend-row">
+        <div class="col-xs-12 calendar-legend-col">
+            <table>
+                <tr>
+                    <td class="calendar-legend-icon" style="background-color: #ff6666;">2</td>
+                    <td class="calendar-legend-name">Not Available</td>
+                    <td class="calendar-legend-icon" style="background-color: #fcdda4;">1</td>
+                    <td class="calendar-legend-name">Partially Available</td>
+                    <td class="calendar-legend-icon" style="background-color: #d6f9d1;">0</td>
+                    <td class="calendar-legend-name">Available</td>
+                    <td class="calendar-legend-icon" style="background-color: #afdfed;">1</td>
+                    <td class="calendar-legend-name">Selected Date</td>
+                    <td class="calendar-legend-icon" style="background-color: #e0dcdb;">2</td>
+                    <td class="calendar-legend-name">Current Date</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row calendar-max-order-display-row">
+        <div class="col-xs-12 calendar-max-order-display">
+            <span cal-max-orders-update></span>
+        </div>
+    </div>
+  </li>
+</ul>

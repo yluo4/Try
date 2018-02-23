@@ -1,0 +1,38 @@
+
+<style>
+    .order-detail-reporting-grid .order-detail-reporting-title {
+        margin: 12px 0px 6px 5px;
+        font-weight: bold;
+    }
+    .order-detail-reporting-grid .ui-grid-header-cell .ui-grid-header-cell-label {
+        white-space: initial;
+        position: absolute;
+        bottom: 0px;
+    }
+    /*
+    .order-detail-reporting-grid .ui-grid-top-panel {
+        background: #ffffff;
+    }
+    */
+    .order-detail-reporting-grid .ui-grid-header-cell {
+        font-weight: bold !important;
+        color: #808080;
+        padding-left: 5px;
+    }
+    .order-detail-reporting-grid .ui-grid-cell {
+        padding-left: 5px;
+    }
+    .order-detail-reporting-grid .ui-grid-row:nth-child(odd) .ui-grid-cell {
+        background-color: #f3f3f3;
+    }
+    .order-detail-reporting-grid .ui-grid-row:nth-child(even) .ui-grid-cell {
+        background-color: #ffffff;
+    }
+</style>
+<div class="order-detail-reporting-grid" ng-if="hasOrderDetail">
+    <div class="order-detail-reporting-title">Order Number: {{orderNum}}</div>
+    <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-resize-columns class="grid" ng-style="gridStyle"></div>
+</div>
+<div ng-if="!hasOrderDetail">
+    <label class='w-statusInfo'>No Data Found</label>
+</div>
