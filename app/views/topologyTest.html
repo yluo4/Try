@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            .inner-device {
+                fill-opacity: 0;
+                stroke: #a6a6a6;
+                stroke-width: 2;
+            }
+            
+            .device {
+                fill: #eaeaea;
+                filter: url("#filter");
+            }
+
+            .alert-device {
+                fill: #eaeaea;
+                stroke: #ff0000;
+                filter: url("#alertFilter");
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <svg width="100%" height="1000px">
+            </svg>
+        </div>
+        
+        <svg id="filterHolder" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+                <filter id="filter" x="-1" y="-1" width="500%" height="500%">
+                    <feOffset result="offOut" in="SourceAlpha" dx="1" dy="1" />
+                    <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                </filter>
+
+                <filter id="alertFilter" x="-1" y="-1" width="500%" height="500%">
+                    <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0"></feOffset>
+                    <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3"></feGaussianBlur>
+                    <feFlood flood-color="#ff0000" flood-opacity="0.5" result="offsetColor"></feFlood>
+                    <feComposite in="offsetColor" in2="blurOut" operator="in" result="offsetBlur"></feComposite>
+                    <feBlend in="SourceGraphic" in2="offsetBlur" mode="normal"></feBlend>
+                </filter>
+            </defs>
+        </svg>
+        
+        <script type="text/javascript" src="../../lib/d3/d3.min.js"></script> 
+        <script type="text/javascript" src="../topo/js/node/node.js"></script>
+        <script type="text/javascript" src="../topo/js/node/node-vpe.js"></script>
+        <script type="text/javascript" src="../js/topologyTest.js"></script>
+    </body>
+</html>

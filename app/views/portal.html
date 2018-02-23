@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div ng-controller="PortalPageCtrl" class="portal-part">
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>vPE/vCE Alert by Date/Time</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <vpe-alert-by-time></vpe-alert-by-time>
+        </div>
+    </div>
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>vPE/vCE Alert by Customer by Date/Time</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <vpe-alert-by-customer></vpe-alert-by-customer>
+        </div>
+    </div>
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>vPE/vCE Alert by VCE ID by Date/Time</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <vpe-alert-by-vce></vpe-alert-by-vce>
+        </div>
+    </div>
+    
+    <!-- 
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>Service Path</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <vpls2-crs-service-path></vpls2-crs-service-path>
+        </div>
+    </div>
+    
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>Service Path</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <emt2-crs-service-path></emt2-crs-service-path>
+        </div>
+    </div>
+    -->
+    <div class="sub-section">
+        <div class="row sub-section-header">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 sub-section-header-name">
+                <span>Service Path</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <a class="panel-toggle glyphicon glyphicon-chevron-up" ng-click="togglePanel($event)"></a>
+            </div>
+        </div>
+        <div class="row sub-section-body">
+            <ce2-crs-service-path></ce2-crs-service-path>
+        </div>
+    </div>
+     
+</div>

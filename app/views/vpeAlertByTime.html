@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div id="byTime">
+    <div class="report-content">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            </div>
+            <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <label style="padding-left: 3px;">Start Date &amp; Time</label>
+                        <div class="input-group date" start-datetimez-by-time>
+                            <input class="setPresetIndicator form-control" type="text"/>
+                            <span class="setPresetIndicator input-group-addon"> 
+                                <span class="setPresetIndicator glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <label style="padding-left: 3px;">End Date &amp; Time</label>
+                        <div class="input-group date" end-datetimez-by-time>
+                            <input class="setPresetIndicator form-control" type="text"/>
+                            <span class="setPresetIndicator input-group-addon"> 
+                                <span class="setPresetIndicator glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                <button type="submit" class="btn btn-primary submit" ng-click="submitByTime()"
+                    data-loading-text="&#60;i class='fa fa-circle-o-notch fa-spin'&#62;&#60;/i&#62; Processing...">
+                    Submit
+                </button>
+            </div>
+        </div>
+        
+        <div class="report-result">
+            <div class="table-area">
+                <table ng-table="tableParamsByTime" class="table table-bordered table-striped" show-group="false">
+                    <tr class="ng-table-group" ng-repeat-start="group in $groups">
+                        <td colspan="8">
+                          <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                            <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                            <strong>{{ group.value }}</strong>
+                          </a>
+                        </td>
+                    </tr>
+                    <tr ng-hide="group.$hideRows" ng-repeat="reportData in group.data" ng-repeat-end>
+                        <td data-title="'vPE Name'" sortable="'vpeName'">
+                            <span ng-if="group.value == 'vCE Alert'">{{reportData.vpeName}}</span>
+                            <a style="cursor: pointer;" ng-click="openModalByTime(reportData.vpeName)" ng-if="group.value == 'vPE Alert'">{{reportData.vpeName}}</a>
+                        </td>
+                        <td data-title="'vCE Name'" sortable="'vceName'">{{reportData.vceName}}</td>
+                        <td data-title="'Alert ID'" sortable="'alertID'">{{reportData.alertID}}</td>
+                        <td data-title="'Alert Description'" sortable="'alertDes'">{{reportData.alertDes}}</td>
+                        <td data-title="'Date Time'" sortable="'time'">{{reportData.time}}</td>
+                        <td data-title="'Global Customer ID'" sortable="'customerID'">{{reportData.customerID}}</td>
+                        <td data-title="'Customer Name'" sortable="'customerName'">{{reportData.customerName}}</td>
+                        <td data-title="'Service Type'" sortable="'serviceType'">{{reportData.serviceType}}</td>
+                        <td data-title="'Alert Type'" sortable="'alertType'" groupable="'alertType'" ng-if="false">{{reportData.alertType}}</td>
+                    </tr>
+                </table>
+                
+                <!--
+                <table ng-table="tableParamsByTime" class="table table-bordered table-striped">
+                    <tr ng-repeat="reportData in $data">
+                        <td data-title="'Alert ID'" sortable="'alertID'">{{reportData.alertID}}</td>
+                        <td data-title="'Alert Description'" sortable="'alertDes'">{{reportData.alertDes}}</td>
+                        <td data-title="'Date Time'" sortable="'time'">{{reportData.time}}</td>
+                        <td data-title="'Global Customer ID'" sortable="'customerID'">{{reportData.customerID}}</td>
+                        <td data-title="'Customer Name'" sortable="'customerName'">{{reportData.customerName}}</td>
+                        <td data-title="'vCE Name'" sortable="'vceName'">{{reportData.vceName}}</td>
+                        <td data-title="'vPE Name'" sortable="'vpeName'">{{reportData.vpeName}}</td>
+                        <td data-title="'Service Type'" sortable="'serviceType'">{{reportData.serviceType}}</td>
+                        <td data-title="'Alert Type'" sortable="'alertType'">{{reportData.alertType}}</td>
+                    </tr>
+                </table>
+                -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="byTimeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <button type="button" class="close" style="float: left; line-height: 0.5;" ng-click="backButtonClickByTime()">
+                        <span aria-hidden="true" style="font-size: 40px;">&laquo;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">vPE/vCE Alerts - Customer Impact Topology</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="byTimeTopology" class="topology">
+                        <svg>
+                        </svg>
+                    </div>
+                    <div class="modal-table" id="byTime-modal-table">
+                        <table ng-table="modalTableParamsByTime" class="table table-bordered table-striped" show-group="false">
+                            <tr class="ng-table-group" ng-repeat-start="group in $groups">
+                                <td colspan="8">
+                                  <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                                    <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                                    <strong>{{ group.value }}</strong>
+                                  </a>
+                                </td>
+                            </tr>
+                            <tr ng-hide="group.$hideRows" ng-repeat="reportData in group.data" ng-repeat-end>
+                                <td data-title="'vPE Name'" sortable="'vpeName'">{{reportData.vpeName}}</td>
+                                <td data-title="'vCE Name'" sortable="'vceName'">{{reportData.vceName}}</td>
+                                <td data-title="'Alert ID'" sortable="'alertID'">{{reportData.alertID}}</td>
+                                <td data-title="'Alert Description'" sortable="'alertDes'">{{reportData.alertDes}}</td>
+                                <td data-title="'Date Time'" sortable="'time'">{{reportData.time}}</td>
+                                <td data-title="'Global Customer ID'" sortable="'customerID'">{{reportData.customerID}}</td>
+                                <td data-title="'Customer Name'" sortable="'customerName'">{{reportData.customerName}}</td>
+                                <td data-title="'Service Type'" sortable="'serviceType'">{{reportData.serviceType}}</td>
+                                <td data-title="'Alert Type'" sortable="'alertType'" groupable="'alertType'" ng-if="false">{{reportData.alertType}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

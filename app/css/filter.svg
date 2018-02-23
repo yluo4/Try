@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="filterTest" x="-1" y="-1" width="500%" height="500%">
+            <feOffset result="offOut" in="SourceAlpha" dx="1" dy="1" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
+
+        <filter id="alertFilterTest" x="-1" y="-1" width="500%" height="500%">
+            <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0"></feOffset>
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3"></feGaussianBlur>
+            <feFlood flood-color="#ff0000" flood-opacity="0.5" result="offsetColor"></feFlood>
+            <feComposite in="offsetColor" in2="blurOut" operator="in" result="offsetBlur"></feComposite>
+            <feBlend in="SourceGraphic" in2="offsetBlur" mode="normal"></feBlend>
+        </filter>
+    </defs>
+</svg>
